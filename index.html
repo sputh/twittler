@@ -6,6 +6,8 @@
     <script src="data_generator.js"></script>
     <script src="jquery.timeago.js"></script>
     
+    <link rel="stylesheet" href="bootstrap.css">
+    
 
     <style type="text/css">
         .bigHeading {
@@ -21,44 +23,10 @@
 background-attachment: fixed; background-color: rgb(192, 222, 237); 
 background-repeat: no-repeat;">
 
-    <div class="container" id="pageTop">
-        <div class="navbar navbar-inverse">
-            <div class="navbar-inner">
-                <a class="brand" href="./index_files/index.html"><h1>Twittler</h1></a>
-            </div>
-        </div>
-        <div id="userBox" class="row span4">
-            <div id="nowViewing">
-                <h4>Now Viewing</h4>
-            </div>
-            <div id="feedViewing">
-                <p>Entire Twittler Feed</p>
-            </div>
-        </div>
-        <div id="tweetBox" class="row span7">
-            <div class="row span7" id="latestTweetsHeader">
-                <div class="span3">
-                    <h3>Latest Tweets</h3>
-                </div>
-            </div>
-            <div class="row span7" id="newTweetsAvail" style="display: block;">
-                <a href="http://kevinhamiltonsmith.com/hackreactor/twittler/index.html#" id="newTweetLink"><h5 id="newTweetAlert">43 new Tweets</h5></a>
-            </div>
-            <div id="tweetStream">
-                <!-- Individual Tweets -->
-                <div class="singleTweet row span7"><div class="row"><div class="userName span3"><a href="http://kevinhamiltonsmith.com/hackreactor/twittler/index.html#" class="mracus">@mracus</a></div><div class="tweetTime span3 text-right">less than a minute ago</div></div><div class="row"><p class="span7"> made my security system </p></div></div><div class="singleTweet row span7"><div class="row"><div class="userName span3"><a href="http://kevinhamiltonsmith.com/hackreactor/twittler/index.html#" class="sharksforcheap">@sharksforcheap</a></div><div class="tweetTime span3 text-right">less than a minute ago</div></div><div class="row"><p class="span7">nearly enjoyed my way of life #techlife</p></div></div><div class="singleTweet row span7"><div class="row"><div class="userName span3"><a href="http://kevinhamiltonsmith.com/hackreactor/twittler/index.html#" class="douglascalhoun">@douglascalhoun</a></div><div class="tweetTime span3 text-right">less than a minute ago</div></div><div class="row"><p class="span7">the president developed my mind #burningman</p></div></div><div class="singleTweet row span7"><div class="row"><div class="userName span3"><a href="http://kevinhamiltonsmith.com/hackreactor/twittler/index.html#" class="mracus">@mracus</a></div><div class="tweetTime span3 text-right">less than a minute ago</div></div><div class="row"><p class="span7">the president experienced my life for real</p></div></div><div class="singleTweet row span7"><div class="row"><div class="userName span3"><a href="http://kevinhamiltonsmith.com/hackreactor/twittler/index.html#" class="mracus">@mracus</a></div><div class="tweetTime span3 text-right">less than a minute ago</div></div><div class="row"><p class="span7">nearly experienced my bad decision </p></div></div><div class="singleTweet row span7"><div class="row"><div class="userName span3"><a href="http://kevinhamiltonsmith.com/hackreactor/twittler/index.html#" class="shawndrost">@shawndrost</a></div><div class="tweetTime span3 text-right">less than a minute ago</div></div><div class="row"><p class="span7">nearly built a way of life #sf</p></div></div><div class="singleTweet row span7"><div class="row"><div class="userName span3"><a href="http://kevinhamiltonsmith.com/hackreactor/twittler/index.html#" class="shawndrost">@shawndrost</a></div><div class="tweetTime span3 text-right">less than a minute ago</div></div><div class="row"><p class="span7">a ninja drank my way of life </p></div></div><div class="singleTweet row span7"><div class="row"><div class="userName span3"><a href="http://kevinhamiltonsmith.com/hackreactor/twittler/index.html#" class="shawndrost">@shawndrost</a></div><div class="tweetTime span3 text-right">less than a minute ago</div></div><div class="row"><p class="span7"> drunk an entire worm #techlife</p></div></div><div class="singleTweet row span7"><div class="row"><div class="userName span3"><a href="http://kevinhamiltonsmith.com/hackreactor/twittler/index.html#" class="douglascalhoun">@douglascalhoun</a></div><div class="tweetTime span3 text-right">less than a minute ago</div></div><div class="row"><p class="span7"> saw this money #sf</p></div></div><div class="singleTweet row span7"><div class="row"><div class="userName span3"><a href="http://kevinhamiltonsmith.com/hackreactor/twittler/index.html#" class="douglascalhoun">@douglascalhoun</a></div><div class="tweetTime span3 text-right">less than a minute ago</div></div><div class="row"><p class="span7">nearly doped a new form of cat </p></div></div><div class="singleTweet row span7"><div class="row"><div class="userName span3"><a href="http://kevinhamiltonsmith.com/hackreactor/twittler/index.html#" class="shawndrost">@shawndrost</a></div><div class="tweetTime span3 text-right">less than a minute ago</div></div><div class="row"><p class="span7">productively hardened the security system but only i know how</p></div></div>
-            </div>
-        </div>
-        <div class="topNav row span7 offset4">
-            <a href="http://kevinhamiltonsmith.com/hackreactor/twittler/index.html#pageTop">Top</a>
-        </div>
-    </div>
-    <!--div class="bigHeading">
+    <div class="bigHeading">
         <h1>Twittler!</h1>
         <p class="lead"></p>
-    </!--div-->
-
-    <button type="button" class="btn btn-primary pull-left" id="refresh" data-loading-text="Loading...">Refresh Tweets</button>
+    </div>
 
 
     <script>
