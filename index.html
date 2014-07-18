@@ -1,51 +1,171 @@
 <!DOCTYPE html>
 <html>
-  <head>
-
+<head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
     <script src="jquery.timeago.js"></script>
-    
+
     <link rel="stylesheet" href="bootstrap.css">
-    
 
     <style type="text/css">
         .bigHeading {
-		    margin: 60px 0;
-		    text-align: center;
-	    }
-    </style>    
- <title>Sam</title>     
-      
-  </head>
+            margin: 60px 0;
+            text-align: center;
+        }
+    </style>
+    <title>Twittler</title>
 
-<body style="background-image: url(https://abs.twimg.com/a/1405012680/images/themes/theme1/bg.png); 
-background-attachment: fixed; background-color: rgb(192, 222, 237); 
+</head>
+<body style="background-image: url(https://abs.twimg.com/a/1405012680/images/themes/theme1/bg.png);
+background-attachment: fixed; background-color: rgb(192, 222, 237);
 background-repeat: no-repeat;">
-
     <div class="bigHeading">
         <h1>Twittler!</h1>
         <p class="lead"></p>
     </div>
+    <p id="newTweets"><center><input class="button" id="showNewTweets" type="button" value="Show new tweets" /></center></p>
+    <br />
+    <div class="row span4">
+        <p id="userInput"> Would you like to tweet?</p>
+        <form class="userTweet">
+            <input type="text" class="tweetButton" id="username" value="username" />
+            <br />
+            <p>Message</p>
+            <textarea class="tweetButton" id="newUserTweet" name="newUserTweet" rows="4" cols="50" maxlength="140">Tweet tweet</textarea>
+            <br />
+            <button class="tweetButton" id="tweetButton"> Add</button>
+</form>
+    </div>
+    <div class="row span10" id="stream" style="border:3px solid #fff">
+        <table class="table table-striped" style="border: 3px solid #fff">
+            <tr><th align="center" style="color:#fff; background:rgb(192, 222, 237); font-size:25px">Tweet Stream:</th></tr>
+            <tbody class="streamTable"></tbody>
+        </table>
+    </div>
+    <div class="row span4">
+        <div class="well well-small">
+            <ul class="nav nav-pills nav-stacked">
+                <li class="nav-header">Who you're following:
+                <br /><center>(click to filter your tweets)</center></li>
+                <li class="pickUser" id=""> <!--must leave id blank for everyone link to work-->
+                    <a href="#everyone">@everyone</a>
+                </li>
 
-
+                <li class="pickUser" id="shawndrost">
+                    <a href="#">@shawndrost</a>
+                </li>
+                <li class="pickUser" id="sharksforcheap">
+                    <a href="#">@sharksforcheap</a>
+                </li>
+                <li class="pickUser" id="mracus">
+                    <a href="#">@mracus</a>
+                </li>
+                <li class="pickUser" id="douglascalhoun">
+                    <a href="#">@douglascalhoun</a>
+                </li>
+            </ul>
+        </div>
+    </div>
     <script>
         $(document).ready(function () {
-            var $body = $('body');
+            var $body = $('.streamTable');
             $body.html('');
 
             var index = streams.home.length - 1;
+            function newTweets() {
+                //gets the tweets and appends it to the body
+                while (index >= 0) {
+                    var tweet = streams.home[index];
+                    var $tweet = $('<tr><tr>');
+                    $tweet.text('@' + tweet.user + '@' + jQuery.timeago(tweet.created_at) + ':' + tweet.message);
+                    $tweet.appendTo($body);
+                    index -= 1;
+                }
+            }
             while (index >= 0) {
                 var tweet = streams.home[index];
-                var $tweet = $('<div></div>');
-                $tweet.text('@' + tweet.user + '@' + jQuery.timeago(tweet.created_at) + ': ' + tweet.message);
+                var $tweet = $('<tr></tr>');
+                $tweet.html("<td><strong>@" + tweet.user + ":</td></strong>" + "<td>" + jQuery.timeago(tweet.created_at) + "</td><td>" + tweet.message + "</td>");
                 $tweet.appendTo($body);
                 index -= 1;
             }
+            //}
+            var scheduleNextTweet = function () {
+                generateRandomTweet();
+                setTimeout(scheduleNextTweet, 2000);
 
+            };
+
+            scheduleNextTweet();
+
+            $('#username').click("input", function () {
+                if (this.value === "username") {
+                    this.value = "";
+                }
+            })
+
+            $('#newUserTweet').click(function () {
+                if (this.value === "Tweet tweet") {
+                    this.value = "";
+                }
+            })
+
+            $("#tweetButton").click("button", function () {
+                var userName = $("#username").val();
+                var userMessage = $("#newUserTweet").val();
+                if (userName === "" || userName ==="username") {
+                    alert("Please specify a username\n If you're lacking creativity, anonymous is a classic choice");
+                } else if (userMessage === "") {
+                    alert("You cannot submit a blank tweet");
+                } else {
+                    var tweet = {
+                        user: userName,
+                        message: userMessage,
+                        created_at: new Date()
+                    };
+                    var $tweet = $('<tr></tr>');
+                    $tweet.html("<td><strong>@" + tweet.user + ":</td></strong>" + "<td>" + jQuery.timeago(tweet.created_at) + "</td><td>" + tweet.message + "</td>");
+                    $tweet.prependTo($body);
+            }
+            })
+            $("#showNewTweets").click(function (i) {
+                i.preventDefault();
+                $('')
+                updateStream();
+            })
+            var updateStream = function () {
+                var $tbody = $('.streamTable');
+
+                var index = streams.home.length - 1;
+                while (index >= 0) {
+                    var tweet = streams.home[index];
+                    var $tweet = $('<tr></tr>');
+                    $tweet.html("<td><strong>@" + tweet.user + ":</td></strong>" + "<td>" + jQuery.timeago(tweet.created_at) + "</td><td>" + tweet.message + "</td>");
+                    $tweet.appendTo($body);
+                    index -= 1;
+                }
+            };
+            $(".pickUser").click(function () {
+                var clickUser = $(this).attr("id");
+                window.clickUser = clickUser;
+                console.log("Stream Switch:" + clickUser);
+                if (clickUser) {
+                    var $tbody = $('.streamTable');
+                    $tbody.children().remove();
+                    var index = streams.users[clickUser].length - 1;
+                    while (index >= 0) {
+                        var tweet = streams.users[clickUser][index];
+                        var $tweet = $("<tr></tr>");
+                        $tweet.html("<td><strong>@" + tweet.user + ":</td></strong>" + "<td>" + jQuery.timeago(tweet.created_at) + "</td><td>" + tweet.message + "</td>");
+                        $tweet.appendTo($body);
+                        index -= 1;
+                    }
+                } else {
+                    updateStream();
+                }
+            })
         });
-
     </script>
-</body>
 
+</body>
 </html>
